@@ -31,5 +31,6 @@ public class A1Novice {
 			System.out.println(firstName + lastName + totalSpentToPrint);
 
 		}
+		System.out.println("It needs to go to fall");
 	}
 }
