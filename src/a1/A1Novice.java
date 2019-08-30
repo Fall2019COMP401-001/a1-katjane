@@ -31,6 +31,5 @@ public class A1Novice {
 			System.out.println(firstName + lastName + totalSpentToPrint);
 
 		}
-		// hopefull
 	}
 }
