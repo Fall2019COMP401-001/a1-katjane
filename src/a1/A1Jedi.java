@@ -13,11 +13,12 @@ public class A1Jedi {
 		// Your code goes here.
 
 		int itemsInStore = scan.nextInt();
-		// items in store are tracked by their 'I'
 		String[] itemNames = new String[itemsInStore];
 		double[] itemPrices = new double[itemsInStore];
 		int[] itemsBoughtBy = new int[itemsInStore];
 		int[] itemsNumBought = new int[itemsInStore];
+		// all of the "item" arrays are indexed the same way. 
+		
 		for (int i = 0; i < itemsInStore; i++) {
 			itemNames[i] = scan.next();
 			itemPrices[i] = scan.nextDouble();
@@ -29,14 +30,25 @@ public class A1Jedi {
 		String[] lastNames = new String[numCustomers];
 		int[] numItemsBought = new int[numCustomers];
 		double[] amountSpent = new double[numCustomers];
+		// so that customers are not counted as more than one person:
+//		boolean[] itemsCustomerCounted = new boolean[numCustomers];
+//		
+//		for (int e = 0; e < itemsCustomerCounted.length; e++) {
+//			itemsCustomerCounted[e] = false;
+//		}
+		
+		// this loop runs for each customer 
 		for (int j = 0; j < numCustomers; j++) {
+			// all of these arrays are updated for each customer
 			firstNames[j] = scan.next();
 			lastNames[j] = scan.next();
 			numItemsBought[j] = scan.nextInt();
-
+			
+			// these arrays are customer-specific
 			int[] quantOfItem = new int[numItemsBought[j]];
-			// the individual items can be tracked by "K"
 			String[] nameOfItem = new String[numItemsBought[j]];
+			
+			// this loop runs for each item that an individual customer buys 
 			for (int k = 0; k < numItemsBought[j]; k++) {
 				quantOfItem[k] = scan.nextInt();
 				nameOfItem[k] = scan.next();
@@ -48,11 +60,30 @@ public class A1Jedi {
 					if (nameOfItem[k].contentEquals(itemNames[l])) {
 						double cost = itemPrices[l] * quantOfItem[k];
 						amountSpent[j] += cost;
-						itemsBoughtBy[l] ++;
+//						itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
 						itemsNumBought[l] += quantOfItem[k];
+						
+						if (k > 0) {
+							if (!(nameOfItem[k].contentEquals(nameOfItem[k - 1]))) {
+								itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
+							}
+						} else {
+							itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
+						}
+//						if (!(nameOfItem[k].contentEquals(nameOfItem[k - 1])) && k > 0) {
+//							itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
+//						} else if (k <= 0) {
+//							itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
+//						}
+//						if (!itemsCustomerCounted[j]) {
+//							itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
+//							itemsCustomerCounted[j] = true;
+//						}
 						break;
 					}
 				}
+				
+				
 			}
 		}
 		

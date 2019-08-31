@@ -72,9 +72,10 @@ public class A1Adept {
 			if (totals[m] > biggestAmount) {
 				biggestAmount = totals[m];
 				biggestIndex = m;
-			} else if (Math.abs(totals[m] - biggestAmount) < 0.0001) {
-				return "TIE, OH NO";
 			}
+//			} else if (Math.abs(totals[m] - biggestAmount) < 0.0001) {
+//				return "TIE, OH NO";
+//			}
 		}
 		
 		String biggestAmountToPrint = df.format(biggestAmount);
@@ -92,9 +93,9 @@ public class A1Adept {
 			if (totals[n] < smallestAmount) {
 				smallestAmount = totals[n];
 				smallestIndex = n;
-			} else if (Math.abs(totals[n] - smallestAmount) < 0.0001) {
-				return "TIE, OH NO";
-			}
+			} 
+//			else if (Math.abs(totals[n] - smallestAmount) < 0.0001) {
+//				return "TIE, OH NO";
 		}
 		
 		String smallestAmountToPrint = df.format(smallestAmount);
