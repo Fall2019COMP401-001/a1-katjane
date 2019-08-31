@@ -66,7 +66,6 @@ public class A1Jedi {
 		}
 	}
 
-	// You can define / use static helper methods here.
 }
 
 // need to record information for every item- how much of it was bought, 
