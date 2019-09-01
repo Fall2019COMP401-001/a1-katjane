@@ -30,12 +30,6 @@ public class A1Jedi {
 		String[] lastNames = new String[numCustomers];
 		int[] numItemsBought = new int[numCustomers];
 		double[] amountSpent = new double[numCustomers];
-		// so that customers are not counted as more than one person:
-//		boolean[] itemsCustomerCounted = new boolean[numCustomers];
-//		
-//		for (int e = 0; e < itemsCustomerCounted.length; e++) {
-//			itemsCustomerCounted[e] = false;
-//		}
 		
 		// this loop runs for each customer 
 		for (int j = 0; j < numCustomers; j++) {
@@ -43,6 +37,10 @@ public class A1Jedi {
 			firstNames[j] = scan.next();
 			lastNames[j] = scan.next();
 			numItemsBought[j] = scan.nextInt();
+			boolean[] itemsRecorded = new boolean[itemsInStore];
+			for (int h = 0; h < itemsInStore; h++) {
+				itemsRecorded[h] = false;
+			}
 			
 			// these arrays are customer-specific
 			int[] quantOfItem = new int[numItemsBought[j]];
@@ -60,25 +58,21 @@ public class A1Jedi {
 					if (nameOfItem[k].contentEquals(itemNames[l])) {
 						double cost = itemPrices[l] * quantOfItem[k];
 						amountSpent[j] += cost;
-//						itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
 						itemsNumBought[l] += quantOfItem[k];
 						
-						if (k > 0) {
-							if (!(nameOfItem[k].contentEquals(nameOfItem[k - 1]))) {
-								itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
-							}
-						} else {
+						if (!itemsRecorded[l]) {
 							itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
+							itemsRecorded[l] = true;
 						}
-//						if (!(nameOfItem[k].contentEquals(nameOfItem[k - 1])) && k > 0) {
-//							itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
-//						} else if (k <= 0) {
+						
+//						if (k > 0) {
+//							if (!(nameOfItem[k].contentEquals(nameOfItem[k - 1]))) {
+//								itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
+//							}
+//						} else {
 //							itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
 //						}
-//						if (!itemsCustomerCounted[j]) {
-//							itemsBoughtBy[l] = itemsBoughtBy[l] + 1;
-//							itemsCustomerCounted[j] = true;
-//						}
+						
 						break;
 					}
 				}
@@ -104,3 +98,8 @@ public class A1Jedi {
 // I need a synched item array. items, itemBoughtBy, itemNumBought. 
 // also, need an if/else, where if itemNumBought is 0, then it will print the 
 // "no customers bought ITEM",  and else it'll print the number bought, etc 
+
+// it would have to be an array that aligns with the item indexing, created and 
+// destroyed for every new customer, that tracks whether that customer has been 
+// recorded as buying that item. Default values are "false", set to true the first time 
+// that it is counted. 
